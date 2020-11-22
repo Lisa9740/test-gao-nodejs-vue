@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.Computer = this.belongsTo(models.Computer)
+      this.Customer = this.belongsTo(models.Customer)
     }
   };
   Attribution.init({

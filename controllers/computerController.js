@@ -1,6 +1,7 @@
 const db = require("../models");
 const computer = db.Computer
 const attribution = db.Attribution
+const customer = db.Customer
 /*const Op = db.Sequelize.Op;*/
 
 // Create and Save a new computer
@@ -12,13 +13,44 @@ exports.create = (req, res) => {
 
 // Retrieve all Computers from the database.
 exports.findAll = (req, res) => {
-    computer.findAll({include: [
-        {
-            model: attribution,
-            attributes: ['id', 'date', 'hour'],
-            required: false,
-        }]}).then(data => {
-        res.status(200).json(data);
+    computer.findAll({
+        attributes: ['id', 'name'],
+        include: [
+                {
+                    model: attribution,
+                    attributes: ['id', 'date', 'hour'],
+                    required: false,
+                include: [{
+                    model: customer,
+                    attributes: ['id', 'firstname', 'lastname'],
+                    required: false
+                }]
+            }
+
+            ]
+    }).then(data => {
+            let returnedComputer = []
+            data.forEach( computer => {
+                let attributions = []
+                if (computer.Attributions.length !== 0) {
+                    attributions = [
+                       computer.Attributions
+                    ]
+
+                        // id: computer.Attributions.id,
+                        // date: computer.Attributions.date,
+                        // hour: computer.Attributions.hour,
+                        // customerId: computer.Attributions.customerId,
+
+                }
+                returnedComputer.push({
+                    id : computer.id,
+                    name : computer.name,
+                    Attributions: attributions
+                })
+            })
+
+            res.status(200).json(returnedComputer);
     });
 
 };
