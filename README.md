@@ -1,5 +1,5 @@
 # gao-nodejs-vue
-## Projet de gestion d'attibution de postes informatique
+## Projet de gestion d'attribution de postes informatique
 
 La conception et le développement de ce projet s'est effectué dans le cadre de la formation de Simplon.
 
