@@ -1,4 +1,4 @@
-# gao-symfony-vuz
+# gao-symfony-vue
 ## Projet de gestion d'attibution de postes informatique
 
 La conception et le développement de ce projet s'est effectué dans le cadre de la formation de Simplon.
