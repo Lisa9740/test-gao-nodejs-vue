@@ -2,6 +2,7 @@
   <v-card>
     <v-card-title>
       {{ computer.name }}
+      <RemoveComputer :computer="computer"/>
     </v-card-title>
     <v-card-text>
       <v-row v-for="(horaire, key) in horaires" :key="key">
@@ -12,7 +13,7 @@
                 </span>
         </v-col>
         <v-col cols="2">
-<!--          <RemoveAttribution v-if="horaire.attribution" :computer="computer" :attribution="horaire.attribution" :horaire="horaire.index" @removeAttribution="removeAttribution" />-->
+          <RemoveAttribution v-if="horaire.attribution" :computer="computer" :attribution="horaire.attribution" :horaire="horaire.index" @removeAttribution="removeAttribution" />
 
           <AddAttribution v-if="!horaire.attribution" :computer="computer" :horaire="horaire.index" :date="date" @addAttribution="addAttribution" />
         </v-col>
@@ -21,8 +22,10 @@
   </v-card>
 </template>
 <script>
+import _ from 'lodash';
 import AddAttribution from './AddAttribution.vue'
-// import RemoveAttribution from './RemoveAttribution'
+import RemoveAttribution from './RemoveAttribution.vue'
+import RemoveComputer from './RemoveComputer.vue'
 
 export default {
   props: {
@@ -40,7 +43,8 @@ export default {
   },
   components: {
      AddAttribution,
-    // RemoveAttribution
+     RemoveAttribution,
+    RemoveComputer
   },
   data() {
     return {
@@ -61,7 +65,7 @@ export default {
             id: attribution.id,
             name: attribution.Customer.firstname + " " + attribution.Customer.lastname ,
           }
-          console.log(this.attributions)
+
       }
 
       this.buildHoraires();
@@ -80,10 +84,14 @@ export default {
       this.computer.Attributions.push(attribution)
       this.initialise();
     },
-    // removeAttribution: function(horaire){
-    //   _.unset(this.attributions,horaire)
-    //   this.buildHoraires();
-    // }
+    removeAttribution: function(horaire){
+
+      _.unset(this.attributions,horaire)
+      this.buildHoraires();
+    },
+    removeComputer: function (){
+
+    }
   }
 }
 </script>

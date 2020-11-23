@@ -60,7 +60,7 @@ export default {
 
         attribute: function () {
             if (this.isValid()) {
-                axios.post('http://127.0.0.1:3000/api/attributions', this.theCustomer())
+                axios.post('http://127.0.0.1:3000/api/attributions/create', this.theCustomer())
                     .then(({ data }) => {
                         console.log(data)
                         this.$emit('addAttribution', data)
