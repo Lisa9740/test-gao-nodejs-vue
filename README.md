@@ -34,4 +34,4 @@ Après avoir fait un git clone de ce projet, vous devez effectué les actions su
     npm install
 
 ## Lancement du projet :
-  
+  cd client && npm run serve
