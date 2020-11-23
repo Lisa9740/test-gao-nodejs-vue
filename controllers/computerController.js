@@ -68,6 +68,29 @@ exports.update = (req, res) => {
 };
 
 // Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {
-
-};
+exports.delete = async (req, res, next) => {
+    const id = req.body.id;
+    try {
+        const computer = await computer.findOne({
+            where: { id }
+        });
+        if(!computer){
+            return res.status(200).json({
+                success: false,
+                message: 'Information introuvable',
+            })
+        }
+        await computer.destroy();
+        return res.status(200).json({
+            success: true,
+            message: 'Attribution annulée',
+            content: id
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(200).json({
+            success: false,
+            message: 'Ressource indisponible',
+        })
+    }
+}

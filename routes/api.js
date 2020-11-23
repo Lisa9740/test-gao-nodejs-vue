@@ -9,10 +9,14 @@ const attributions = require("../controllers/attributionController.js");
 
 router.post('/computers/create', computers.create)
 
+router.post('/computers/remove', computers.delete)
+
 router.get('/customers/search', customers.findAll)
 
 router.get('/attributions', attributions.findAll)
 
-router.post('/attributions', customers.create)
+router.post('/attributions/create', attributions.create)
+
+router.post('/attributions/remove', attributions.delete)
 
 module.exports = router;
